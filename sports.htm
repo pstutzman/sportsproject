@@ -1,0 +1,70 @@
+<html>
+ <head>
+ <script src='/jquery.js'></script>
+ <style type="text/css">
+ .div1 { margin: 1em; padding: .2em 1em; border: 1px solid green; width: 50%; }
+ </style>
+ </head>
+
+ <h1>Choose your favorite sport</h1>
+ <form id="form1" name="form1">
+<div class="div1">
+ <p>Choose your favorite sport:</p>
+ <select id="sel1" name="sport">
+ <option value="">Select One </option>
+ <option>Baseball</option>
+ <option>Football</option>
+ <option>Hockey</option>
+ </select></div>
+
+ <div class="div1">
+ <p>Choose your favorite team:</p>
+ <select id="sel2" name="team"></select>
+ </div>
+
+ <div class="div1">
+ <p>You chose:</p>
+ <span id="answer"></span>
+</div>
+ </form>
+
+ <script>
+
+ // Define a few arrays ...
+
+ var baseball = ['Mets','Yanks', 'Red Sox', 'Orioles'];
+ var football = ['Bills','Jets','Giants','Patriots','Steelers'];
+ var hockey = ['Sabres', 'Kings','Leafs','Blackhawks','Nordiques'];
+
+
+ $('#sel1').change(updateTeam); // listener when first select gets changed
+ $('#sel2').change(updateAnswer); // listener when second select changes.
+
+ function updateTeam() {
+ var teams = [];
+ $('#sel2').html(''); // clear out all existing options
+
+ var sport = $('#sel1').val() ; // get the value of the first select
+
+ if (sport == "Baseball") { teams = baseball }
+ if (sport == "Football") { teams = football }
+ if (sport == "Hockey") {teams = hockey }
+
+// wrap up teams array in jQuery goodness, run an "each", update options var
+
+ var options = '<option value="">Choose a team</option>' // create a blank options var
+ $(teams).each( function() {
+ options += '<option>'+ this +'</option>'
+ });
+ $('#sel2').html(options);
+ }
+
+ function updateAnswer() {
+ var result = $('#sel2').val(); // change this to the REAL result
+
+//alert ("You chose: "+ result); // change this so it displays in correct
+ // place on this page.
+ $('#answer').html(result);
+ }
+
+ </script>
